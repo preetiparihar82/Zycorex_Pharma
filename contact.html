@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Zycorex Pharma</title>
+
+    <!-- Meta SEO Tags -->
+    <meta name="description"
+        content="Get in touch with Zycorex Pharma Pvt. Ltd. Contact Meetbhai Vadher for medicine supply enquiries, pricing quotes, and warehouse deliveries in Ahmedabad.">
+    <meta name="keywords"
+        content="contact Zycorex Pharma, Meetbhai Vadher phone, Changodar pharma warehouse, order medicines Ahmedabad, pharma enquiry">
+    <meta name="author" content="Zycorex Pharma Pvt. Ltd.">
+
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Floating Background Aesthetic Blobs -->
+    <div class="bg-blob bg-blob-blue"></div>
+    <div class="bg-blob bg-blob-purple"></div>
+
+    <!-- ==========================================
+       HEADER & NAVIGATION
+       ========================================== -->
+    <header class="header">
+        <div class="container navbar">
+            <a href="index" class="logo" id="logoLink">
+                <img src="images/Zycorex_Pharma_logo.png" alt="Zycorex Pharma Logo">
+            </a>
+
+            <button class="mobile-nav-toggle" id="mobileMenuToggle" aria-label="Toggle Navigation Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav class="nav-menu" id="navMenu">
+                <a href="index" class="nav-link" id="navHome">Home</a>
+                <a href="about" class="nav-link" id="navAbout">About Us</a>
+                <a href="services" class="nav-link" id="navServices">Services</a>
+                <a href="contact" class="nav-link active" id="navContact">Contact Us</a>
+                <div class="nav-cta">
+                    <a href="contact" class="btn btn-primary" id="headerCtaBtn">Enquire Now</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ==========================================
+       BREADCRUMB PAGE HEADER
+       ========================================== -->
+    <section class="page-header">
+        <div class="container page-header-content">
+            <h1>Contact Us & Enquiries</h1>
+            <div class="breadcrumbs">
+                <a href="index">Home</a>
+                <span>/</span>
+                <span class="current">Contact Us</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+       CONTACT CONTAINER (SPLIT INFO & FORM)
+       ========================================== -->
+    <section class="section" id="contactSection">
+        <div class="container contact-container">
+
+            <!-- Left Panel: Contact Cards -->
+            <div class="contact-info-panel animate-on-scroll animate-slide-left">
+                <span class="badge badge-soft">Get In Touch</span>
+                <h2>Reach Our Sourcing Operations</h2>
+                <p>We supply a wide range of pharmaceutical products to doctors, hospitals, clinics, and medical stores
+                    across India. Reach out directly to initiate trade ties.</p>
+
+                <div class="info-card">
+                    <div class="info-card-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="info-card-text">
+                        <h4>Primary Contact Person</h4>
+                        <p>Meetbhai Vadher (Operations Lead)</p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-card-icon">
+                        <i class="fas fa-phone-volume"></i>
+                    </div>
+                    <div class="info-card-text">
+                        <h4>Phone Number</h4>
+                        <p><a href="tel:9558327979">+91 95583 27979</a></p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-card-icon">
+                        <i class="fas fa-envelope-open-text"></i>
+                    </div>
+                    <div class="info-card-text">
+                        <h4>Email Address</h4>
+                        <p><a href="mailto:info@zycorexpharmapvt.com">info@zycorexpharmapvt.com</a></p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-card-icon">
+                        <i class="fas fa-map-location-dot"></i>
+                    </div>
+                    <div class="info-card-text">
+                        <h4>Office & Warehouse Address</h4>
+                        <p>35, Silver-3 Industrial Estate,<br>B/h. Ramdev Masala Factory,<br>Changodar, Ahmedabad -
+                            382213</p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-card-icon">
+                        <i class="fas fa-business-time"></i>
+                    </div>
+                    <div class="info-card-text">
+                        <h4>Business Working Hours</h4>
+                        <p>Monday to Saturday: 10:00 AM – 7:00 PM<br>Sunday: Closed</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel: Enquiry Form -->
+            <div class="form-card animate-on-scroll animate-slide-right">
+
+                <!-- Success State (Shown by main.js) -->
+                <div class="form-success-container" id="formSuccess">
+                    <div class="success-icon">
+                        <i class="fas fa-circle-check"></i>
+                    </div>
+                    <h4>Enquiry Submitted!</h4>
+                    <p>Thank you for reaching out to Zycorex Pharma. Meetbhai Vadher or our operations desk will review
+                        your details and reply by email/phone within 24 business hours.</p>
+                </div>
+
+                <!-- Active Form -->
+                <form id="enquiryForm" action="#" method="POST" novalidate>
+                    <h3>Send Trade Enquiry</h3>
+                    <p>Provide your clinical coordinates below to request medicine quotes, contract schedules, or sample
+                        catalogs.</p>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="name">Your Name *</label>
+                            <input type="text" id="name" name="name" class="form-control" placeholder="Meetbhai Vadher"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" class="form-control" placeholder="95583 27979"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" class="form-control"
+                                placeholder="info@zycorexpharmapvt.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="orgType">Organization Type</label>
+                            <select id="orgType" name="orgType" class="form-control">
+                                <option value="doctor">Medical Practitioner / Doctor</option>
+                                <option value="hospital">Hospital Representative</option>
+                                <option value="pharmacy">Pharmacy / Chemist Shop</option>
+                                <option value="distributor">Wholesaler / Distributor</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group form-group-full">
+                            <label for="message">Your Enquiry Details *</label>
+                            <textarea id="message" name="message" class="form-control"
+                                placeholder="Specify drug formulation requirements, tablets/capsules/injectables quantity, or custom manufacturing needs..."
+                                required></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        Submit Enquiry <i class="fas fa-paper-plane"></i>
+                    </button>
+                    <div style="
+    margin-top:55px;
+    width:100%;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 12px 30px rgba(0,0,0,.12);
+    background:#fff;
+">
+                        <img src="./images/contact_us.jpg" alt="Hospital Supply Logistics" style="
+            width:100%;
+            max-width:100%;
+            height:auto;
+            display:block;
+            object-fit:cover;
+        ">
+                    </div>
+
+
+                </form>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ==========================================
+       INTERACTIVE MAP SECTION
+       ========================================== -->
+    <section class="section map-section" id="mapSection">
+        <div class="container">
+            <div class="section-header animate-on-scroll animate-fade-up">
+                <span class="badge badge-soft-purple">Location</span>
+                <h2>Find Us in Changodar</h2>
+                <p>Located within the major industrial manufacturing belt of Ahmedabad, Gujarat.</p>
+            </div>
+
+            <div class="map-card animate-on-scroll animate-fade-up">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14701.371286595568!2d72.43383842186715!3d22.900741275330364!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e90a56aa1ad1b%3A0xc316ee0a7199c9c1!2sChangodar%2C%20Gujarat%20382213!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                    title="Zycorex Pharma Location Map, Changodar, Ahmedabad"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+       FOOTER
+       ========================================== -->
+    <footer class="footer">
+        <div class="container footer-grid">
+
+            <div class="footer-col footer-about">
+                <img src="images/Zycorex_Pharma_logo.png" alt="Zycorex Logo" class="footer-logo">
+                <p>Engagement in third-party manufacturing and distribution of pharmaceutical formulations. Delivering
+                    trusted medicines across India.</p>
+                <div class="footer-socials">
+                    <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index">Home</a></li>
+                    <li><a href="about">About Us</a></li>
+                    <li><a href="services">Services & Quality</a></li>
+                    <li><a href="contact">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Contact Info</h3>
+                <div class="footer-contact-list">
+                    <div class="footer-contact-item">
+                        <i class="fas fa-user"></i>
+                        <span><strong>Meetbhai Vadher</strong><br>Primary Contact</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+91 95583 27979</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@zycorexpharmapvt.com</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-location-dot"></i>
+                        <span>35, Silver-3 Industrial Estate,<br>B/h Ramdev Masala Factory,<br>Changodar, Ahmedabad -
+                            382213</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3>Business Hours</h3>
+                <div class="footer-hours-list">
+                    <div class="footer-hour-row">
+                        <span class="day">Monday - Saturday:</span>
+                        <span class="time">10:00 AM – 7:00 PM</span>
+                    </div>
+                    <div class="footer-hour-row">
+                        <span class="day">Sunday:</span>
+                        <span class="time">Closed</span>
+                    </div>
+                    <div class="footer-hour-row" style="border: none; padding-top: 15px;">
+                        <span>Est. Year: 2026</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Zycorex Pharma Pvt. Ltd. All rights reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms & Conditions</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript File -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>
