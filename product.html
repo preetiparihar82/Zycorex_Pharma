@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Products | Zycorex Pharma</title>
+    <meta name="description" content="Explore the complete product pipeline of Zycorex Pharma Pvt. Ltd. including Zyserra-SP, Zymox 625, and other quality healthcare formulations.">
+    
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Product Page Specific CSS (You can move this to your style.css) */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .product-card {
+            background: var(--gradient-card, #ffffff);
+            border: 1px solid var(--border, #eaeaea);
+            border-radius: var(--border-radius-lg, 16px);
+            padding: 25px;
+            box-shadow: var(--shadow-sm, 0 4px 6px rgba(0,0,0,0.05));
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md, 0 10px 20px rgba(0,0,0,0.1));
+            border-color: var(--primary, #0ea5e9);
+        }
+        
+        .product-title {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            color: var(--primary, #0ea5e9);
+            margin-bottom: 10px;
+            border-bottom: 2px solid rgba(14, 165, 233, 0.1);
+            padding-bottom: 10px;
+        }
+        
+        .product-composition {
+            font-size: 0.95rem;
+            color: var(--dark-gray, #4b5563);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(14, 165, 233, 0.05);
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .meta-pack {
+            color: var(--dark, #1f2937);
+        }
+        
+        .meta-mrp {
+            color: var(--secondary, #8b5cf6);
+        }
+        /* Modern Product Grid */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+/* Updated Card Structure */
+.product-card {
+    background: var(--gradient-card, #ffffff);
+    border: 1px solid var(--border, #eaeaea);
+    border-radius: var(--border-radius-lg, 16px);
+    overflow: hidden; /* Ensures the image background respects the rounded corners */
+    box-shadow: var(--shadow-sm, 0 4px 6px rgba(0,0,0,0.05));
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-md, 0 15px 30px rgba(0,0,0,0.1));
+    border-color: var(--primary, #0ea5e9);
+}
+
+/* New Image Showcase Area */
+.product-image-wrapper {
+    width: 100%;
+    height: 260px; /* Slightly increased height */
+    background: radial-gradient(circle, #ffffff 0%, #f1f5f9 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 11px; /* Reduced padding so the image can be larger */
+    border-bottom: 1px solid #f1f5f9;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Image Hover, Blend Mode & Drop-shadow Effects */
+.product-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Ensures the whole medicine box is visible */
+    mix-blend-mode: darken; /* MAGIC TRICK: Makes the white background of your images invisible */
+    transform: scale(1.15); /* Scales the image up to fill the dead space */
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: drop-shadow(0 15px 25px rgba(0,0,0,0.15));
+}
+
+.product-card:hover .product-image-wrapper img {
+    transform: scale(1.15); /* Smooth zoom effect on hover */
+}
+
+/* Content Area */
+.product-content {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+}
+
+.product-title {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    color: var(--primary, #0ea5e9);
+    margin-bottom: 10px;
+}
+
+.product-composition {
+    font-size: 0.95rem;
+    color: var(--dark-gray, #4b5563);
+    line-height: 1.6;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed #e2e8f0;
+}
+
+.product-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(14, 165, 233, 0.05);
+    padding: 12px 15px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.meta-pack {
+    color: var(--dark, #1f2937);
+}
+
+.meta-mrp {
+    color: var(--secondary, #8b5cf6);
+}
+    </style>
+</head>
+
+<body>
+
+    <div class="bg-blob bg-blob-blue"></div>
+    <div class="bg-blob bg-blob-purple"></div>
+
+    <!-- HEADER -->
+   <header class="header">
+        <div class="container navbar">
+            <a href="index" class="logo" id="logoLink">
+                <img src="images/Zycorex_Pharma_logo.png" alt="Zycorex Pharma Logo">
+            </a>
+
+            <button class="mobile-nav-toggle" id="mobileMenuToggle" aria-label="Toggle Navigation Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+             <nav class="nav-menu" id="navMenu">
+                <a href="/" class="nav-link" id="navHome">Home</a>
+                <a href="/about" class="nav-link" id="navAbout">About Us</a>
+                <a href="/services" class="nav-link" id="navServices">Services</a>
+                <a href="/product" class="nav-link active" id="navProducts">Products</a>
+                <a href="/contact" class="nav-link" id="navContact">Contact Us</a>
+                <div class="nav-cta">
+                    <a href="https://wa.me/919558327979?text=Hello%20Zycorex%20Pharma%2C%20I%20would%20like%20to%20enquire%20about%20your%20pharmaceutical%20products."
+                        target="_blank" rel="noopener noreferrer" class="btn btn-primary" id="headerCtaBtn">Enquire
+                        Now</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- PAGE HEADER -->
+    <section class="page-header">
+        <div class="container page-header-content">
+            <h1>Our Products</h1>
+            <div class="breadcrumbs">
+                <a href="index">Home</a> <span>/</span> <span class="current">Products</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCTS SECTION -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header text-center animate-on-scroll animate-fade-up">
+                <span class="badge badge-gradient">Quality Assured</span>
+                <h2>Pharmaceutical Formulations</h2>
+                <p>Delivering trusted medicines across our healthcare network with assured quality and ethical practices.</p>
+            </div>
+
+           <div class="products-grid">
+                
+                <!-- Product 1 -->
+                <div class="product-card animate-on-scroll animate-fade-up">
+                    <div class="product-image-wrapper">
+                        <img src="images/Zyserra-SP Tab.png" alt="Zyserra-SP Tablet Box">
+                    </div>
+                    <div class="product-content">
+                        <div>
+                            <h3 class="product-title">Zyserra-SP Tab</h3>
+                            <p class="product-composition">Aceclofenac 100mg + Paracetamol 325mg + Serratiopeptidase 15mg</p>
+                        </div>
+                        <div class="product-meta">
+                            <span class="meta-pack"><i class="fas fa-box"></i> 10x10</span>
+                            <span class="meta-mrp">MRP: ₹109.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card animate-on-scroll animate-fade-up">
+                    <div class="product-image-wrapper">
+                        <img src="images/Zymox 625 Tab.png" alt="Zymox 625 Tablet Box">
+                    </div>
+                    <div class="product-content">
+                        <div>
+                            <h3 class="product-title">Zymox 625 Tab</h3>
+                            <p class="product-composition">Amoxycillin 500mg + Potassium Clavulanate Diluted 125 mg</p>
+                        </div>
+                        <div class="product-meta">
+                            <span class="meta-pack"><i class="fas fa-box"></i> 10x10</span>
+                            <span class="meta-mrp">MRP: ₹219.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card animate-on-scroll animate-fade-up">
+                    <div class="product-image-wrapper">
+                        <img src="images/Zyfix - 200 Tab.png" alt="Zyfix-200 Tablet Box">
+                    </div>
+                    <div class="product-content">
+                        <div>
+                            <h3 class="product-title">Zyfix-200 Tab</h3>
+                            <p class="product-composition">Cefixime 200 mg</p>
+                        </div>
+                        <div class="product-meta">
+                            <span class="meta-pack"><i class="fas fa-box"></i> 10x10</span>
+                            <span class="meta-mrp">MRP: ₹119.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="product-card animate-on-scroll animate-fade-up">
+                    <div class="product-image-wrapper">
+                        <img src="images/Zylevo-500 Tab.png" alt="Zylevo-500 Tablet Box">
+                    </div>
+                    <div class="product-content">
+                        <div>
+                            <h3 class="product-title">Zylevo-500 Tab</h3>
+                            <p class="product-composition">Levofloxacin 500 mg</p>
+                        </div>
+                        <div class="product-meta">
+                            <span class="meta-pack"><i class="fas fa-box"></i> 5x10</span>
+                            <span class="meta-mrp">MRP: ₹99.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 5 -->
+                <div class="product-card animate-on-scroll animate-fade-up">
+                    <div class="product-image-wrapper">
+                        <img src="images/Zyvit Plus Tab.png" alt="Zyvit Plus Tablet Box">
+                    </div>
+                    <div class="product-content">
+                        <div>
+                            <h3 class="product-title">Zyvit Plus Tab</h3>
+                            <p class="product-composition">Multivitamin Multiminerals & Antioxidant</p>
+                        </div>
+                        <div class="product-meta">
+                            <span class="meta-pack"><i class="fas fa-box"></i> 15x10</span>
+                            <span class="meta-mrp">MRP: ₹179.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 6 -->
+                <div class="product-card animate-on-scroll animate-fade-up">
+                    <div class="product-image-wrapper">
+                        <img src="images/Zycalvi Plus Tab.png" alt="Zycalvi Plus Tablet Box">
+                    </div>
+                    <div class="product-content">
+                        <div>
+                            <h3 class="product-title">Zycalvi Plus Tab</h3>
+                            <p class="product-composition">Calcium Carbonate 500mg + Vitamin D3 500 IU</p>
+                        </div>
+                        <div class="product-meta">
+                            <span class="meta-pack"><i class="fas fa-box"></i> 15x10</span>
+                            <span class="meta-mrp">MRP: ₹199.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 7 -->
+                <div class="product-card animate-on-scroll animate-fade-up">
+                    <div class="product-image-wrapper">
+                        <img src="images/Zypanto-DSR Cap.png" alt="Zypanto-DSR Capsule Box">
+                    </div>
+                    <div class="product-content">
+                        <div>
+                            <h3 class="product-title">Zypanto-DSR Cap</h3>
+                            <p class="product-composition">Pantoprazole Sodium 40mg + Domperidone 30mg</p>
+                        </div>
+                        <div class="product-meta">
+                            <span class="meta-pack"><i class="fas fa-box"></i> 10x10</span>
+                            <span class="meta-mrp">MRP: ₹159.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 8 -->
+                <div class="product-card animate-on-scroll animate-fade-up">
+                    <div class="product-image-wrapper">
+                        <img src="images/Zyrabe-DSR Cap.png" alt="Zyrabe-DSR Capsule Box">
+                    </div>
+                    <div class="product-content">
+                        <div>
+                            <h3 class="product-title">Zyrabe-DSR Cap</h3>
+                            <p class="product-composition">Rabeprazole Sodium 20mg + Domperidone 30mg</p>
+                        </div>
+                        <div class="product-meta">
+                            <span class="meta-pack"><i class="fas fa-box"></i> 10x10</span>
+                            <span class="meta-mrp">MRP: ₹169.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 9 -->
+                <div class="product-card animate-on-scroll animate-fade-up">
+                    <div class="product-image-wrapper">
+                        <img src="images/Zyvit Syp.png" alt="Zyvit Syrup Bottle and Box">
+                    </div>
+                    <div class="product-content">
+                        <div>
+                            <h3 class="product-title">Zyvit Syrup</h3>
+                            <p class="product-composition">Multivitamins & Multiminerals Dietary Supplements</p>
+                        </div>
+                        <div class="product-meta">
+                            <span class="meta-pack"><i class="fas fa-box"></i> 100ml / 200ml</span>
+                            <span class="meta-mrp">MRP: ₹80 / ₹125</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 10 -->
+                <div class="product-card animate-on-scroll animate-fade-up">
+                    <div class="product-image-wrapper">
+                        <img src="images/Zylo Gel.png" alt="Zylo Gel Tube and Box">
+                    </div>
+                    <div class="product-content">
+                        <div>
+                            <h3 class="product-title">Zylo Gel</h3>
+                            <p class="product-composition">Diclofenac Diethylamine 1.16% w/w + Diclofenac Sodium 1.00% w/w + Virgin Linseed Oil 3.0% w/w + Methyl Salicylate 10.00% w/w + Capsaicin 0.025% w/w + Menthol 5.00% w/w</p>
+                        </div>
+                        <div class="product-meta">
+                            <span class="meta-pack"><i class="fas fa-box"></i> 30gm</span>
+                            <span class="meta-mrp">MRP: ₹119.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 11 -->
+                <div class="product-card animate-on-scroll animate-fade-up">
+                    <div class="product-image-wrapper">
+                        <img src="images/Zyrelief-P Tab.png" alt="Zyrelief-P Tablet Box">
+                    </div>
+                    <div class="product-content">
+                        <div>
+                            <h3 class="product-title">Zyrelief-P Tab</h3>
+                            <p class="product-composition">Aceclofenac 100mg + Paracetamol 325mg</p>
+                        </div>
+                        <div class="product-meta">
+                            <span class="meta-pack"><i class="fas fa-box"></i> 10x10</span>
+                            <span class="meta-mrp">MRP: ₹49.00</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+     <footer class="footer">
+        <div class="container footer-grid">
+
+            <div class="footer-col footer-about">
+                <img src="images/Zycorex_Pharma_logo.png" alt="Zycorex Logo" class="footer-logo">
+                <p>Engagement in third-party manufacturing and distribution of pharmaceutical formulations. Delivering
+                    trusted medicines across India.</p>
+                <div class="footer-socials">
+                    <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/services">Services & Quality</a></li>
+                     <li><a href="/product">Products</a></li>
+                    <li><a href="/contact">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Contact Info</h3>
+                <div class="footer-contact-list">
+                    <div class="footer-contact-item">
+                        <i class="fas fa-user"></i>
+                        <span><strong>Meet Vadher</strong><br>Primary Contact</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+91 95583 27979</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@zycorexpharmapvt.com</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-location-dot"></i>
+                        <span>35, Silver-3 Industrial Estate,<br>B/h Ramdev Masala Factory,<br>Changodar, Ahmedabad -
+                            382213</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3>Business Hours</h3>
+                <div class="footer-hours-list">
+                    <div class="footer-hour-row">
+                        <span class="day">Monday - Saturday:</span>
+                        <span class="time">10:00 AM – 7:00 PM</span>
+                    </div>
+                    <div class="footer-hour-row">
+                        <span class="day">Sunday:</span>
+                        <span class="time">Closed</span>
+                    </div>
+                    <div class="footer-hour-row" style="border: none; padding-top: 15px;">
+                        <span>Est. Year: 2026</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Zycorex Pharma Pvt. Ltd. All rights reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/terms">Terms & Conditions</a>
+            </div>
+        </div>
+    </footer>
+     <a href="https://wa.me/919558327979?text=Hello%20Zycorex%20Pharma%2C%20I%20would%20like%20to%20enquire%20about%20your%20pharmaceutical%20products."
+        target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Chat on WhatsApp"
+        id="whatsappFloat">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
