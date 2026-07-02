@@ -3646,74 +3646,141 @@ textarea.form-control {
 /* ==========================================
    LEADERSHIP / FOUNDER SECTION
    ========================================== */
+
+
 .leadership-section {
-    background-color: var(--light);
+    background-color: var(--light, #f8f9fa);
+    padding: 50px 0;
 }
 
-.leadership-wrapper {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 50px;
-    align-items: center;
-}
-
-@media (min-width: 992px) {
-    .leadership-wrapper {
-        grid-template-columns: 4fr 6fr;
-        gap: 80px;
-    }
-}
-/* Director Card Frame */
-.leadership-image-frame {
-    position: relative;
-    background: var(--gradient-card, #ffffff);
-    border: 1px solid var(--border);
-    border-radius: var(--border-radius-lg, 16px);
-    padding: 20px; /* Reduced padding so the rectangular image fits nicely */
-    text-align: center;
-    box-shadow: var(--shadow-md);
+/* Flex Layout for Rows */
+.leadership-row {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+    margin-bottom: 80px;
 }
 
-/* Decorative background shape */
-.leadership-image-frame::before {
+/* Reverses the order for even rows on desktop (Zig-Zag) */
+.leadership-row.reverse {
+    flex-direction: row-reverse;
+}
+
+.leadership-content-col {
+    flex: 1.2;
+}
+
+/* Container for the circular image */
+.leadership-image-col {
+    flex: 1;
+    max-width: 450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 20px;
+}
+
+/* Modern gradient glow behind the circle */
+.leadership-image-col::before {
     content: '';
     position: absolute;
-    top: -15px;
-    left: -15px;
-    right: 15px;
-    bottom: 15px;
-    background: var(--gradient-secondary);
-    border-radius: var(--border-radius-lg, 16px);
-    z-index: -1;
+    width: 330px; 
+    height: 330px;
+    border-radius: 50%; /* Perfect circle */
+    background: var(--gradient-secondary, linear-gradient(135deg, #0ea5e9, #8b5cf6));
+    z-index: 0;
     opacity: 0.15;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-/* New Rectangular Image Container */
+/* The Circular Image Box with Dynamic Border */
 .director-image-box {
-    width: 100%;
+    width: 300px;
     height: 300px;
-    border-radius: 12px; 
+    border-radius: 50%;
     overflow: hidden;
-    margin-bottom: 20px;
-    background-color: #f8f9fa; 
+    position: relative;
+    padding: 6px; /* Space for the animated border */
+    background: white;
+    z-index: 1;
+    margin: 0 auto;
 }
 
-/* Forces the image to cover the box perfectly without stretching */
+/* The dynamic rotating border effect */
+.director-image-box::before {
+    content: '';
+    position: absolute;
+    top: -5px; left: -5px; right: -5px; bottom: -5px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, var(--primary), #8b5cf6, #0ea5e9, var(--primary));
+    z-index: -1;
+    animation: rotateBorder 4s linear infinite;
+}
+
+@keyframes rotateBorder {
+    100% { transform: rotate(360deg); }
+}
+
+/* Internal circle mask */
+.director-image-box::after {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    background: white;
+    border-radius: 50%;
+    z-index: 0;
+}
+
+/* Image styling */
 .director-image-box img {
     width: 100%;
     height: 100%;
+    border-radius: 50%;
     object-fit: cover;
     object-position: top center;
+    position: relative;
+    z-index: 1;
     display: block;
 }
 
 /* Fallback icon styling if no image is present */
 .director-image-box i {
-    font-size: 100px;
-    color: #ccc;
-    line-height: 300px;
+    font-size: 120px;
+    color: #e2e8f0;
+    line-height: 284px;
+    text-align: center;
+    width: 100%;
+}
+
+/* Responsive Mobile Stacking */
+@media (max-width: 991px) {
+    .leadership-row, .leadership-row.reverse {
+        flex-direction: column; /* Stacks image on top of text */
+        text-align: center;
+        gap: 40px;
+        margin-bottom: 70px;
+    }
+    
+    .leadership-row .founder-quote {
+        text-align: left;
+    }
+    
+    .leadership-row .founder-signature {
+        justify-content: center;
+    }
+    
+    .director-image-box {
+        width: 250px;
+        height: 250px;
+    }
+    
+    .leadership-image-col::before {
+        width: 275px;
+        height: 275px;
+    }
 }
 
 .founder-badge h4 {
