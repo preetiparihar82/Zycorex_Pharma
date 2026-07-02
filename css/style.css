@@ -266,7 +266,7 @@ img {
 }
 
 .section {
-    padding: 70px 0;
+    padding: 60px 0;
     position: relative;
 }
 
@@ -1903,8 +1903,8 @@ textarea.form-control {
     position: fixed;
     bottom: 25px;
     right: 25px;
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     background: #25d366;
     color: white;
@@ -2478,12 +2478,10 @@ textarea.form-control {
     }
 
     .logo img {
-        height: 60px;
+        height: 58px;
     }
 
-    .header.sticky .logo img {
-        height: 60px;
-    }
+ 
 
     /* Hero Slider */
     .hero-slider-section {
@@ -2830,20 +2828,16 @@ textarea.form-control {
 
     /* Header */
     .header {
-        height: 68px;
+        height: 70px;
     }
 
-    .header.sticky {
-        height: 62px;
-    }
+   
 
     .logo img {
-        height: 36px;
+        height: 42px;
     }
 
-    .header.sticky .logo img {
-        height: 32px;
-    }
+   
 
     .nav-menu {
         width: 260px;
@@ -2857,7 +2851,7 @@ textarea.form-control {
 
     /* Hero */
     .hero-slider-section {
-        height: 65vh;
+        height: 80vh;
         min-height: 380px;
         margin-top: 68px;
     }
@@ -3341,24 +3335,19 @@ textarea.form-control {
     }
 
     .header {
-        height: 64px;
+        height: 70px;
     }
 
-    .header.sticky {
-        height: 58px;
-    }
+    
 
     .hero-slider-section {
         margin-top: 64px;
     }
 
     .logo img {
-        height: 32px;
+        height: 42px;
     }
 
-    .header.sticky .logo img {
-        height: 28px;
-    }
 
     .nav-menu {
         width: 240px;
@@ -3674,16 +3663,17 @@ textarea.form-control {
         gap: 80px;
     }
 }
-
-/* Founder Graphic / Image Frame */
+/* Director Card Frame */
 .leadership-image-frame {
     position: relative;
-    background: var(--gradient-card);
+    background: var(--gradient-card, #ffffff);
     border: 1px solid var(--border);
-    border-radius: var(--border-radius-lg);
-    padding: 40px;
+    border-radius: var(--border-radius-lg, 16px);
+    padding: 20px; /* Reduced padding so the rectangular image fits nicely */
     text-align: center;
     box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
 }
 
 /* Decorative background shape */
@@ -3695,24 +3685,35 @@ textarea.form-control {
     right: 15px;
     bottom: 15px;
     background: var(--gradient-secondary);
-    border-radius: var(--border-radius-lg);
+    border-radius: var(--border-radius-lg, 16px);
     z-index: -1;
     opacity: 0.15;
 }
 
-.founder-avatar-box {
-    width: 150px;
-    height: 150px;
-    background: var(--gradient-primary);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 60px;
-    color: var(--light);
-    margin: 0 auto 30px;
-    box-shadow: var(--shadow-blue);
-    border: 5px solid #ffffff;
+/* New Rectangular Image Container */
+.director-image-box {
+    width: 100%;
+    height: 300px;
+    border-radius: 12px; 
+    overflow: hidden;
+    margin-bottom: 20px;
+    background-color: #f8f9fa; 
+}
+
+/* Forces the image to cover the box perfectly without stretching */
+.director-image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+}
+
+/* Fallback icon styling if no image is present */
+.director-image-box i {
+    font-size: 100px;
+    color: #ccc;
+    line-height: 300px;
 }
 
 .founder-badge h4 {
@@ -3725,10 +3726,9 @@ textarea.form-control {
 .founder-badge p {
     color: var(--primary);
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 1rem;
     margin: 0;
 }
-
 /* Leadership Content */
 .founder-quote {
     position: relative;
@@ -4040,4 +4040,18 @@ textarea.form-control {
 .phil-feature-line h4 i {
     color: var(--clr-blue);
     font-size: 1.2rem;
+}
+
+
+/* Fix white gap between header and page-header on mobile */
+@media screen and (max-width: 991px) {
+    .header {
+        margin-bottom: 0 !important;
+    }
+    
+    .page-header {
+        margin-top: 60px !important;
+       
+        padding-top: 70px; 
+    }
 }
