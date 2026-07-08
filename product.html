@@ -17,49 +17,134 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* Product Page Specific CSS (You can move this to your style.css) */
+        /* Modern Product Grid */
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 30px;
-            margin-top: 20px;
+            margin-top: 40px;
+            align-items: stretch;
         }
-        
+
+        /* 3D Flip Card Container */
         .product-card {
-            background: var(--gradient-card, #ffffff);
-            border: 1px solid var(--border, #eaeaea);
+            background: transparent;
+            perspective: 1000px;
+            cursor: pointer;
+            min-height: 480px;
+        }
+
+        /* Inner container with smooth animation */
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1); /* Smoother turn animation */
+            transform-style: preserve-3d;
+        }
+
+        .product-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        /* Front and Back Faces Setup */
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
             border-radius: var(--border-radius-lg, 16px);
-            padding: 25px;
-            box-shadow: var(--shadow-sm, 0 4px 6px rgba(0,0,0,0.05));
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
+        }
+
+        /* Front specific styling */
+        .flip-card-front {
+            background: var(--gradient-card, #ffffff);
+            border: 1px solid var(--border, #eaeaea);
+            box-shadow: var(--shadow-sm, 0 4px 6px rgba(0,0,0,0.05));
             justify-content: space-between;
         }
-        
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-md, 0 10px 20px rgba(0,0,0,0.1));
+
+        .product-card:hover .flip-card-front {
+            box-shadow: var(--shadow-md, 0 15px 30px rgba(0,0,0,0.1));
             border-color: var(--primary, #0ea5e9);
         }
-        
+
+        /* Modern, Attractive Back of Card */
+        .flip-card-back {
+            transform: rotateY(180deg);
+            padding: 25px;
+            overflow-y: auto;
+            justify-content: flex-start;
+            background: linear-gradient(135deg, #ffffff 0%, #e4f3fd 100%); /* Soft blue modern gradient */
+            border: 1px solid var(--primary, #0ea5e9);
+            box-shadow: 0 15px 30px rgba(14, 165, 233, 0.15);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Decorative background element on the back */
+        .flip-card-back::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 150px; height: 150px;
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.1) 0%, rgba(255,255,255,0) 70%);
+            z-index: -1;
+            border-radius: 50%;
+            transform: translate(30%, -30%);
+        }
+
+        /* Front Image Area */
+        .product-image-wrapper {
+            width: 100%;
+            height: 260px;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: fill;
+            mix-blend-mode: darken;
+            transform: scale(1.15);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.15));
+        }
+
+        /* Front Content Area */
+        .product-content {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+        }
+
         .product-title {
             font-family: var(--font-heading);
             font-size: 1.4rem;
             color: var(--primary, #0ea5e9);
             margin-bottom: 10px;
-            border-bottom: 2px solid rgba(14, 165, 233, 0.1);
-            padding-bottom: 10px;
         }
-        
+
         .product-composition {
             font-size: 0.95rem;
             color: var(--dark-gray, #4b5563);
             line-height: 1.6;
-            margin-bottom: 20px;
-            flex-grow: 1;
+            margin-bottom: 15px;
         }
-        
+
         .product-meta {
             display: flex;
             justify-content: space-between;
@@ -68,114 +153,45 @@
             padding: 12px 15px;
             border-radius: 8px;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
         }
+
+        .meta-pack { color: var(--dark, #1f2937); }
+        .meta-mrp { color: var(--secondary, #8b5cf6); }
+
+        /* Tap Hint Text */
+        .tap-hint {
+            font-size: 0.8rem;
+            color: #9ca3af;
+            text-align: center;
+            font-style: italic;
+            border-top: 1px dashed #e2e8f0;
+            padding-top: 15px;
+            margin-top: auto;
+        }
+
+        .tap-hint i {
+            margin-right: 5px;
+            color: var(--primary, #0ea5e9);
+        }
+
+        /* Back Details Styling */
+        .back-subtitle { font-size: 1.05rem; color: #4b5563; font-style: italic; margin-bottom: 4px; font-weight: 600;}
+        .back-title { font-size: 1.25rem; color: #1e3a8a; margin-bottom: 20px; font-weight: 800; line-height: 1.2;}
         
-        .meta-pack {
-            color: var(--dark, #1f2937);
-        }
+        .features-list { display: flex; justify-content: space-between; text-align: center; margin-bottom: 25px; }
+        .feature-item { display: flex; flex-direction: column; align-items: center; gap: 8px; width: 33%; }
+        .feature-icon { font-size: 20px; color: #1e3a8a; background: #ffffff; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border: 1px solid #bfdbfe; box-shadow: 0 4px 6px rgba(0,0,0,0.05);}
+        .feature-icon.orange { color: #ea580c; border-color: #fed7aa;}
+        .feature-icon.green { color: #16a34a; border-color: #bbf7d0;}
+        .feature-text { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: #1f2937; line-height: 1.2;}
         
-        .meta-mrp {
-            color: var(--secondary, #8b5cf6);
-        }
-        /* Modern Product Grid */
-.products-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 30px;
-    margin-top: 40px;
-}
-
-/* Updated Card Structure */
-.product-card {
-    background: var(--gradient-card, #ffffff);
-    border: 1px solid var(--border, #eaeaea);
-    border-radius: var(--border-radius-lg, 16px);
-    overflow: hidden; /* Ensures the image background respects the rounded corners */
-    box-shadow: var(--shadow-sm, 0 4px 6px rgba(0,0,0,0.05));
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-}
-
-.product-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-md, 0 15px 30px rgba(0,0,0,0.1));
-    border-color: var(--primary, #0ea5e9);
-}
-
-/* New Image Showcase Area */
-.product-image-wrapper {
-    width: 100%;
-    height: 260px; /* Slightly increased height */
-    background: radial-gradient(circle, #ffffff 0%, #f1f5f9 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 11px; /* Reduced padding so the image can be larger */
-    border-bottom: 1px solid #f1f5f9;
-    position: relative;
-    overflow: hidden;
-}
-
-/* Image Hover, Blend Mode & Drop-shadow Effects */
-.product-image-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain; /* Ensures the whole medicine box is visible */
-    mix-blend-mode: darken; /* MAGIC TRICK: Makes the white background of your images invisible */
-    transform: scale(1.15); /* Scales the image up to fill the dead space */
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    filter: drop-shadow(0 15px 25px rgba(0,0,0,0.15));
-}
-
-.product-card:hover .product-image-wrapper img {
-    transform: scale(1.15); /* Smooth zoom effect on hover */
-}
-
-/* Content Area */
-.product-content {
-    padding: 25px;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    justify-content: space-between;
-}
-
-.product-title {
-    font-family: var(--font-heading);
-    font-size: 1.4rem;
-    color: var(--primary, #0ea5e9);
-    margin-bottom: 10px;
-}
-
-.product-composition {
-    font-size: 0.95rem;
-    color: var(--dark-gray, #4b5563);
-    line-height: 1.6;
-    margin-bottom: 25px;
-    padding-bottom: 20px;
-    border-bottom: 1px dashed #e2e8f0;
-}
-
-.product-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(14, 165, 233, 0.05);
-    padding: 12px 15px;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 0.95rem;
-}
-
-.meta-pack {
-    color: var(--dark, #1f2937);
-}
-
-.meta-mrp {
-    color: var(--secondary, #8b5cf6);
-}
+        .indications-badge { background: #1e3a8a; color: #ffffff; padding: 5px 12px; border-radius: 6px; display: inline-block; font-weight: 700; font-size: 0.9rem; margin-bottom: 10px; letter-spacing: 0.5px;}
+        .indications-list { padding-left: 20px; color: #374151; font-size: 0.95rem; font-weight: 500; line-height: 1.7; margin-bottom: 15px;}
+        .indications-list li::marker { color: #0ea5e9; }
+        
+        .rx-caution { font-size: 0.7rem; color: #dc2626; border: 1px solid #fca5a5; padding: 8px; border-radius: 4px; background: #fef2f2; text-align: center; font-weight: 600; margin-top: auto;}
     </style>
 </head>
 
@@ -217,7 +233,7 @@
         <div class="container page-header-content">
             <h1>Our Products</h1>
             <div class="breadcrumbs">
-                <a href="index">Home</a> <span>/</span> <span class="current">Products</span>
+                <a href="/">Home</a> <span>/</span> <span class="current">Products</span>
             </div>
         </div>
     </section>
@@ -231,191 +247,572 @@
                 <p>Delivering trusted medicines across our healthcare network with assured quality and ethical practices.</p>
             </div>
 
-           <div class="products-grid">
+            <div class="products-grid">
                 
-                <!-- Product 1 -->
-                <div class="product-card animate-on-scroll animate-fade-up">
-                    <div class="product-image-wrapper">
-                        <img src="images/Zyserra-SP Tab.png" alt="Zyserra-SP Tablet Box">
-                    </div>
-                    <div class="product-content">
-                        <div>
-                            <h3 class="product-title">Zyserra-SP Tab</h3>
-                            <p class="product-composition">Aceclofenac 100mg + Paracetamol 325mg + Serratiopeptidase 15mg</p>
+                <!-- Product 1: ZYRELIEF-P -->
+                <div class="product-card animate-on-scroll animate-fade-up" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="product-image-wrapper">
+                                <img src="images/Zyrelief-P Tab.png" alt="Zyrelief-P Tablet Box">
+                            </div>
+                            <div class="product-content">
+                                <div>
+                                    <h3 class="product-title">ZYRELIEF-P Tab</h3>
+                                    <p class="product-composition">Aceclofenac 100mg + Paracetamol 325mg</p>
+                                </div>
+                                <div>
+                                    <div class="product-meta">
+                                        <span class="meta-pack"><i class="fas fa-box"></i> 10x10</span>
+                                        <span class="meta-mrp">MRP: ₹49.00</span>
+                                    </div>
+                                    <p class="tap-hint"><i class="fas fa-hand-pointer"></i> Tap the card to see details</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="product-meta">
-                            <span class="meta-pack"><i class="fas fa-box"></i> 10x10</span>
-                            <span class="meta-mrp">MRP: ₹109.00</span>
+                        <div class="flip-card-back">
+                            <h4 class="back-subtitle">For Effective Relief From</h4>
+                            <h3 class="back-title">Pain, Inflammation & Fever</h3>
+                            
+                            <div class="features-list">
+                                <div class="feature-item">
+                                    <div class="feature-icon"><i class="fas fa-bullseye"></i></div>
+                                    <span class="feature-text">POWERFUL<br>PAIN RELIEF</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon orange"><i class="fas fa-bone"></i></div>
+                                    <span class="feature-text">REDUCES<br>INFLAMMATION</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon"><i class="fas fa-thermometer-half"></i></div>
+                                    <span class="feature-text">EFFECTIVE<br>FEVER REDUCTION</span>
+                                </div>
+                            </div>
+
+                            <div class="indications-badge">INDICATIONS</div>
+                            <ul class="indications-list">
+                                <li>Osteoarthritis</li>
+                                <li>Rheumatoid Arthritis</li>
+                                <li>Musculoskeletal Pain</li>
+                                <li>Dental Pain</li>
+                                <li>Post-operative Pain</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
 
-                <!-- Product 2 -->
-                <div class="product-card animate-on-scroll animate-fade-up">
-                    <div class="product-image-wrapper">
-                        <img src="images/Zymox 625 Tab.png" alt="Zymox 625 Tablet Box">
-                    </div>
-                    <div class="product-content">
-                        <div>
-                            <h3 class="product-title">Zymox 625 Tab</h3>
-                            <p class="product-composition">Amoxycillin 500mg + Potassium Clavulanate Diluted 125 mg</p>
+                <!-- Product 2: ZYPANTO-DSR -->
+                <div class="product-card animate-on-scroll animate-fade-up" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="product-image-wrapper">
+                                <img src="images/Zypanto-DSR Cap.png" alt="Zypanto-DSR Capsule Box">
+                            </div>
+                            <div class="product-content">
+                                <div>
+                                    <h3 class="product-title">ZYPANTO-DSR Cap</h3>
+                                    <p class="product-composition">Pantoprazole Sodium 40mg (EC) & Domperidone 30mg (SR)</p>
+                                </div>
+                                <div>
+                                    <div class="product-meta">
+                                        <span class="meta-pack"><i class="fas fa-box"></i> 10x10</span>
+                                        <span class="meta-mrp">MRP: ₹159.00</span>
+                                    </div>
+                                    <p class="tap-hint"><i class="fas fa-hand-pointer"></i> Tap the card to see details</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="product-meta">
-                            <span class="meta-pack"><i class="fas fa-box"></i> 10x10</span>
-                            <span class="meta-mrp">MRP: ₹219.00</span>
+                        <div class="flip-card-back">
+                            <h4 class="back-subtitle">Acid Control.</h4>
+                            <h3 class="back-title">Lasting Comfort.</h3>
+                            
+                            <div class="features-list">
+                                <div class="feature-item">
+                                    <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                                    <span class="feature-text">CONTROLS<br>ACIDITY</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon green"><i class="fas fa-arrow-down"></i></div>
+                                    <span class="feature-text">REDUCES<br>REFLUX</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon"><i class="fas fa-sync"></i></div>
+                                    <span class="feature-text">IMPROVES GASTRIC<br>MOTILITY</span>
+                                </div>
+                            </div>
+
+                            <div class="indications-badge">INDICATIONS</div>
+                            <ul class="indications-list">
+                                <li>GERD</li>
+                                <li>Acid Peptic Disorders</li>
+                                <li>Nausea & Vomiting</li>
+                                <li>Dyspepsia</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
 
-                <!-- Product 3 -->
-                <div class="product-card animate-on-scroll animate-fade-up">
-                    <div class="product-image-wrapper">
-                        <img src="images/Zyfix - 200 Tab.png" alt="Zyfix-200 Tablet Box">
-                    </div>
-                    <div class="product-content">
-                        <div>
-                            <h3 class="product-title">Zyfix-200 Tab</h3>
-                            <p class="product-composition">Cefixime 200 mg</p>
+                <!-- Product 3: ZYSERRA-SP -->
+                <div class="product-card animate-on-scroll animate-fade-up" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="product-image-wrapper">
+                                <img src="images/Zyserra-SP Tab.png" alt="Zyserra-SP Tablet Box">
+                            </div>
+                            <div class="product-content">
+                                <div>
+                                    <h3 class="product-title">ZYSERRA-SP Tab</h3>
+                                    <p class="product-composition">Aceclofenac 100mg + Paracetamol 325mg + Serratiopeptidase 15mg</p>
+                                </div>
+                                <div>
+                                    <div class="product-meta">
+                                        <span class="meta-pack"><i class="fas fa-box"></i> 10x10</span>
+                                        <span class="meta-mrp">MRP: ₹109.00</span>
+                                    </div>
+                                    <p class="tap-hint"><i class="fas fa-hand-pointer"></i> Tap the card to see details</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="product-meta">
-                            <span class="meta-pack"><i class="fas fa-box"></i> 10x10</span>
-                            <span class="meta-mrp">MRP: ₹119.00</span>
+                        <div class="flip-card-back">
+                            <h4 class="back-subtitle">Powerful Relief. Faster Recovery.</h4>
+                            <h3 class="back-title">For Pain, Inflammation & Spasm</h3>
+                            
+                            <div class="features-list">
+                                <div class="feature-item">
+                                    <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                                    <span class="feature-text">POWERFUL<br>PAIN RELIEF</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon orange"><i class="fas fa-compress-alt"></i></div>
+                                    <span class="feature-text">REDUCES<br>INFLAMMATION</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon green"><i class="fas fa-running"></i></div>
+                                    <span class="feature-text">FASTER<br>RECOVERY</span>
+                                </div>
+                            </div>
+
+                            <div class="indications-badge">INDICATIONS</div>
+                            <ul class="indications-list">
+                                <li>Osteoarthritis</li>
+                                <li>Sports Injury</li>
+                                <li>Post-operative Pain</li>
+                                <li>Spinal Spondylitis</li>
+                                <li>Musculoskeletal Pain</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
 
-                <!-- Product 4 -->
-                <div class="product-card animate-on-scroll animate-fade-up">
-                    <div class="product-image-wrapper">
-                        <img src="images/Zylevo-500 Tab.png" alt="Zylevo-500 Tablet Box">
-                    </div>
-                    <div class="product-content">
-                        <div>
-                            <h3 class="product-title">Zylevo-500 Tab</h3>
-                            <p class="product-composition">Levofloxacin 500 mg</p>
+                <!-- Product 4: ZYCALVI PLUS -->
+                <div class="product-card animate-on-scroll animate-fade-up" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="product-image-wrapper">
+                                <img src="images/Zycalvi Plus Tab.png" alt="Zycalvi Plus Tablet Box">
+                            </div>
+                            <div class="product-content">
+                                <div>
+                                    <h3 class="product-title">ZYCALVI PLUS Tab</h3>
+                                    <p class="product-composition">Calcium Citrate Maleate 250mg + Vitamin D 100mg + Folic Acid IP 50mg</p>
+                                </div>
+                                <div>
+                                    <div class="product-meta">
+                                        <span class="meta-pack"><i class="fas fa-box"></i> 15x10</span>
+                                        <span class="meta-mrp">MRP: ₹199.00</span>
+                                    </div>
+                                    <p class="tap-hint"><i class="fas fa-hand-pointer"></i> Tap the card to see details</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="product-meta">
-                            <span class="meta-pack"><i class="fas fa-box"></i> 5x10</span>
-                            <span class="meta-mrp">MRP: ₹99.00</span>
+                        <div class="flip-card-back">
+                            <h4 class="back-subtitle">Strong Bones. Stronger Life.</h4>
+                            <h3 class="back-title">Complete Calcium Support.</h3>
+                            
+                            <div class="features-list">
+                                <div class="feature-item">
+                                    <div class="feature-icon"><i class="fas fa-bone"></i></div>
+                                    <span class="feature-text">STRONG<br>BONES</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon green"><i class="fas fa-magnet"></i></div>
+                                    <span class="feature-text">BETTER CALCIUM<br>ABSORPTION</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon orange"><i class="fas fa-heartbeat"></i></div>
+                                    <span class="feature-text">SUPPORTS<br>IMMUNITY</span>
+                                </div>
+                            </div>
+
+                            <div class="indications-badge">INDICATIONS</div>
+                            <ul class="indications-list">
+                                <li>Osteoporosis</li>
+                                <li>Calcium Deficiency</li>
+                                <li>Pregnancy & Lactation</li>
+                                <li>Growing Children</li>
+                                <li>Elderly Care</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
 
-                <!-- Product 5 -->
-                <div class="product-card animate-on-scroll animate-fade-up">
-                    <div class="product-image-wrapper">
-                        <img src="images/Zyvit Plus Tab.png" alt="Zyvit Plus Tablet Box">
-                    </div>
-                    <div class="product-content">
-                        <div>
-                            <h3 class="product-title">Zyvit Plus Tab</h3>
-                            <p class="product-composition">Multivitamin Multiminerals & Antioxidant</p>
+                <!-- Product 5: ZYMOX 625 -->
+                <div class="product-card animate-on-scroll animate-fade-up" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="product-image-wrapper">
+                                <img src="images/Zymox 625 Tab.png" alt="Zymox 625 Tablet Box">
+                            </div>
+                            <div class="product-content">
+                                <div>
+                                    <h3 class="product-title">ZYMOX 625 Tab</h3>
+                                    <p class="product-composition">Amoxycillin 500mg + Potassium Clavulanate Diluted 125 mg</p>
+                                </div>
+                                <div>
+                                    <div class="product-meta">
+                                        <span class="meta-pack"><i class="fas fa-box"></i> 10x10</span>
+                                        <span class="meta-mrp">MRP: ₹219.00</span>
+                                    </div>
+                                    <p class="tap-hint"><i class="fas fa-hand-pointer"></i> Tap the card to see details</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="product-meta">
-                            <span class="meta-pack"><i class="fas fa-box"></i> 15x10</span>
-                            <span class="meta-mrp">MRP: ₹179.00</span>
+                        <div class="flip-card-back">
+                            <h4 class="back-subtitle">Power Against</h4>
+                            <h3 class="back-title">Resistant Infections.</h3>
+                            
+                            <div class="features-list">
+                                <div class="feature-item">
+                                    <div class="feature-icon"><i class="fas fa-viruses"></i></div>
+                                    <span class="feature-text">BROAD<br>SPECTRUM</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon orange"><i class="fas fa-shield-virus"></i></div>
+                                    <span class="feature-text">B-LACTAMASE<br>PROTECTION</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon green"><i class="fas fa-check-circle"></i></div>
+                                    <span class="feature-text">RELIABLE CLINICAL<br>RESPONSE</span>
+                                </div>
+                            </div>
+
+                            <div class="indications-badge">INDICATIONS</div>
+                            <ul class="indications-list">
+                                <li>Respiratory Tract Infections</li>
+                                <li>ENT Infections</li>
+                                <li>Urinary Tract Infections</li>
+                                <li>Skin & Soft Tissue Infections</li>
+                                <li>Dental Infections</li>
+                            </ul>
+                            <!-- <div class="rx-caution">SCHEDULE PRESCRIPTION DRUG - CAUTION<br>Not to be sold by retail without the prescription of a Registered Medical Practitioner.</div> -->
                         </div>
                     </div>
                 </div>
 
-                <!-- Product 6 -->
-                <div class="product-card animate-on-scroll animate-fade-up">
-                    <div class="product-image-wrapper">
-                        <img src="images/Zycalvi Plus Tab.png" alt="Zycalvi Plus Tablet Box">
-                    </div>
-                    <div class="product-content">
-                        <div>
-                            <h3 class="product-title">Zycalvi Plus Tab</h3>
-                            <p class="product-composition">Calcium Carbonate 500mg + Vitamin D3 500 IU</p>
+                <!-- Product 6: ZYVIT Syrup -->
+                <div class="product-card animate-on-scroll animate-fade-up" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="product-image-wrapper">
+                                <img src="images/Zyvit Syp.png" alt="Zyvit Syrup Bottle and Box">
+                            </div>
+                            <div class="product-content">
+                                <div>
+                                    <h3 class="product-title">ZYVIT Syrup</h3>
+                                    <p class="product-composition">Multivitamins & Multiminerals Dietary Supplements</p>
+                                </div>
+                                <div>
+                                    <div class="product-meta">
+                                        <span class="meta-pack"><i class="fas fa-box"></i> 100ml / 200ml</span>
+                                        <span class="meta-mrp">MRP: ₹80 / ₹125</span>
+                                    </div>
+                                    <p class="tap-hint"><i class="fas fa-hand-pointer"></i> Tap the card to see details</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="product-meta">
-                            <span class="meta-pack"><i class="fas fa-box"></i> 15x10</span>
-                            <span class="meta-mrp">MRP: ₹199.00</span>
+                        <div class="flip-card-back">
+                            <h4 class="back-subtitle">Daily Nutrition.</h4>
+                            <h3 class="back-title">Everyday Growth.</h3>
+                            
+                            <div class="features-list">
+                                <div class="feature-item">
+                                    <div class="feature-icon"><i class="fas fa-apple-alt"></i></div>
+                                    <span class="feature-text">COMPLETE<br>NUTRITION</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon orange"><i class="fas fa-shield-alt"></i></div>
+                                    <span class="feature-text">IMMUNITY<br>SUPPORT</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon green"><i class="fas fa-child"></i></div>
+                                    <span class="feature-text">HEALTHY<br>GROWTH</span>
+                                </div>
+                            </div>
+
+                            <div class="indications-badge">INDICATIONS</div>
+                            <ul class="indications-list">
+                                <li>General Weakness</li>
+                                <li>Poor Appetite</li>
+                                <li>Convalescence</li>
+                                <li>Growing Children</li>
+                                <li>Nutritional Deficiencies</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
 
-                <!-- Product 7 -->
-                <div class="product-card animate-on-scroll animate-fade-up">
-                    <div class="product-image-wrapper">
-                        <img src="images/Zypanto-DSR Cap.png" alt="Zypanto-DSR Capsule Box">
-                    </div>
-                    <div class="product-content">
-                        <div>
-                            <h3 class="product-title">Zypanto-DSR Cap</h3>
-                            <p class="product-composition">Pantoprazole Sodium 40mg + Domperidone 30mg</p>
+                <!-- Product 7: ZYFIX-200 -->
+                <div class="product-card animate-on-scroll animate-fade-up" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="product-image-wrapper">
+                                <img src="images/Zyfix - 200 Tab.png" alt="Zyfix-200 Tablet Box">
+                            </div>
+                            <div class="product-content">
+                                <div>
+                                    <h3 class="product-title">ZYFIX-200 Tab</h3>
+                                    <p class="product-composition">Cefixime 200 mg Tablets</p>
+                                </div>
+                                <div>
+                                    <div class="product-meta">
+                                        <span class="meta-pack"><i class="fas fa-box"></i> 10x10</span>
+                                        <span class="meta-mrp">MRP: ₹119.00</span>
+                                    </div>
+                                    <p class="tap-hint"><i class="fas fa-hand-pointer"></i> Tap the card to see details</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="product-meta">
-                            <span class="meta-pack"><i class="fas fa-box"></i> 10x10</span>
-                            <span class="meta-mrp">MRP: ₹159.00</span>
+                        <div class="flip-card-back">
+                            <h4 class="back-subtitle">Targeting Infection.</h4>
+                            <h3 class="back-title">Restoring Health.</h3>
+                            
+                            <div class="features-list">
+                                <div class="feature-item">
+                                    <div class="feature-icon"><i class="fas fa-chart-pie"></i></div>
+                                    <span class="feature-text">BROAD<br>SPECTRUM</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon orange"><i class="fas fa-biohazard"></i></div>
+                                    <span class="feature-text">RAPID BACTERIAL<br>CONTROL</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon green"><i class="fas fa-clock"></i></div>
+                                    <span class="feature-text">CONVENIENT<br>DOSING</span>
+                                </div>
+                            </div>
+
+                            <div class="indications-badge">INDICATIONS</div>
+                            <ul class="indications-list">
+                                <li>Respiratory Tract Infections</li>
+                                <li>ENT Infections</li>
+                                <li>Urinary Tract Infections</li>
+                                <li>Typhoid Fever</li>
+                                <li>Skin & Soft Tissue Infections</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
 
-                <!-- Product 8 -->
-                <div class="product-card animate-on-scroll animate-fade-up">
-                    <div class="product-image-wrapper">
-                        <img src="images/Zyrabe-DSR Cap.png" alt="Zyrabe-DSR Capsule Box">
-                    </div>
-                    <div class="product-content">
-                        <div>
-                            <h3 class="product-title">Zyrabe-DSR Cap</h3>
-                            <p class="product-composition">Rabeprazole Sodium 20mg + Domperidone 30mg</p>
+                <!-- Product 8: ZYVIT PLUS -->
+                <div class="product-card animate-on-scroll animate-fade-up" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="product-image-wrapper">
+                                <img src="images/Zyvit Plus Tab.png" alt="Zyvit Plus Tablet Box">
+                            </div>
+                            <div class="product-content">
+                                <div>
+                                    <h3 class="product-title">ZYVIT PLUS Tab</h3>
+                                    <p class="product-composition">Multivitamin Multiminerals & Antioxidant Tablets</p>
+                                </div>
+                                <div>
+                                    <div class="product-meta">
+                                        <span class="meta-pack"><i class="fas fa-box"></i> 15x10</span>
+                                        <span class="meta-mrp">MRP: ₹179.00</span>
+                                    </div>
+                                    <p class="tap-hint"><i class="fas fa-hand-pointer"></i> Tap the card to see details</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="product-meta">
-                            <span class="meta-pack"><i class="fas fa-box"></i> 10x10</span>
-                            <span class="meta-mrp">MRP: ₹169.00</span>
+                        <div class="flip-card-back">
+                            <h4 class="back-subtitle">Complete Nutrition.</h4>
+                            <h3 class="back-title">Better Health.</h3>
+                            
+                            <div class="features-list">
+                                <div class="feature-item">
+                                    <div class="feature-icon"><i class="fas fa-leaf"></i></div>
+                                    <span class="feature-text">COMPLETE<br>NUTRITION</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon orange"><i class="fas fa-shield-virus"></i></div>
+                                    <span class="feature-text">IMMUNITY<br>SUPPORT</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon green"><i class="fas fa-sun"></i></div>
+                                    <span class="feature-text">POWERFUL<br>ANTIOXIDANT</span>
+                                </div>
+                            </div>
+
+                            <div class="indications-badge">INDICATIONS</div>
+                            <ul class="indications-list">
+                                <li>General Weakness</li>
+                                <li>Poor Appetite</li>
+                                <li>Convalescence</li>
+                                <li>Nutritional Deficiencies</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
 
-                <!-- Product 9 -->
-                <div class="product-card animate-on-scroll animate-fade-up">
-                    <div class="product-image-wrapper">
-                        <img src="images/Zyvit Syp.png" alt="Zyvit Syrup Bottle and Box">
-                    </div>
-                    <div class="product-content">
-                        <div>
-                            <h3 class="product-title">Zyvit Syrup</h3>
-                            <p class="product-composition">Multivitamins & Multiminerals Dietary Supplements</p>
+                <!-- Product 9: ZYLO Gel -->
+                <div class="product-card animate-on-scroll animate-fade-up" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="product-image-wrapper">
+                                <img src="images/Zylo Gel.png" alt="Zylo Gel Tube and Box">
+                            </div>
+                            <div class="product-content">
+                                <div>
+                                    <h3 class="product-title">ZYLO Gel</h3>
+                                    <p class="product-composition">Diclofenac Diethylamine, Virgin Linseed Oil, Menthol & Salicylate Gel</p>
+                                </div>
+                                <div>
+                                    <div class="product-meta">
+                                        <span class="meta-pack"><i class="fas fa-box"></i> 30gm</span>
+                                        <span class="meta-mrp">MRP: ₹119.00</span>
+                                    </div>
+                                    <p class="tap-hint"><i class="fas fa-hand-pointer"></i> Tap the card to see details</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="product-meta">
-                            <span class="meta-pack"><i class="fas fa-box"></i> 100ml / 200ml</span>
-                            <span class="meta-mrp">MRP: ₹80 / ₹125</span>
+                        <div class="flip-card-back">
+                            <h4 class="back-subtitle">Fast Relief From</h4>
+                            <h3 class="back-title">Pain, Swelling & Inflammation</h3>
+                            
+                            <div class="features-list">
+                                <div class="feature-item">
+                                    <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                                    <span class="feature-text">POWERFUL<br>PAIN RELIEF</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon orange"><i class="fas fa-compress-arrows-alt"></i></div>
+                                    <span class="feature-text">REDUCES<br>SWELLING</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon green"><i class="fas fa-stopwatch"></i></div>
+                                    <span class="feature-text">QUICK ACTION<br>FORMULA</span>
+                                </div>
+                            </div>
+
+                            <div class="indications-badge">INDICATIONS</div>
+                            <ul class="indications-list">
+                                <li>Muscle Pain</li>
+                                <li>Joint Pain</li>
+                                <li>Sprains & Strains</li>
+                                <li>Backache</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
 
-                <!-- Product 10 -->
-                <div class="product-card animate-on-scroll animate-fade-up">
-                    <div class="product-image-wrapper">
-                        <img src="images/Zylo Gel.png" alt="Zylo Gel Tube and Box">
-                    </div>
-                    <div class="product-content">
-                        <div>
-                            <h3 class="product-title">Zylo Gel</h3>
-                            <p class="product-composition">Diclofenac Diethylamine 1.16% w/w + Diclofenac Sodium 1.00% w/w + Virgin Linseed Oil 3.0% w/w + Methyl Salicylate 10.00% w/w + Capsaicin 0.025% w/w + Menthol 5.00% w/w</p>
+                <!-- Product 10: ZYRABE-DSR -->
+                <div class="product-card animate-on-scroll animate-fade-up" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="product-image-wrapper">
+                                <img src="images/Zyrabe-DSR Cap.png" alt="Zyrabe-DSR Capsule Box">
+                            </div>
+                            <div class="product-content">
+                                <div>
+                                    <h3 class="product-title">ZYRABE-DSR Cap</h3>
+                                    <p class="product-composition">Rabeprazole Sodium 20mg + Domperidone 30mg Capsules</p>
+                                </div>
+                                <div>
+                                    <div class="product-meta">
+                                        <span class="meta-pack"><i class="fas fa-box"></i> 10x10</span>
+                                        <span class="meta-mrp">MRP: ₹169.00</span>
+                                    </div>
+                                    <p class="tap-hint"><i class="fas fa-hand-pointer"></i> Tap the card to see details</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="product-meta">
-                            <span class="meta-pack"><i class="fas fa-box"></i> 30gm</span>
-                            <span class="meta-mrp">MRP: ₹119.00</span>
+                        <div class="flip-card-back">
+                            <h4 class="back-subtitle">Relieve Acid.</h4>
+                            <h3 class="back-title">Restore Comfort.</h3>
+                            
+                            <div class="features-list">
+                                <div class="feature-item">
+                                    <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                                    <span class="feature-text">CONTROLS<br>ACIDITY</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon orange"><i class="fas fa-arrow-down"></i></div>
+                                    <span class="feature-text">REDUCES<br>REFLUX</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon green"><i class="fas fa-sync-alt"></i></div>
+                                    <span class="feature-text">IMPROVES GASTRIC<br>MOTILITY</span>
+                                </div>
+                            </div>
+
+                            <div class="indications-badge">INDICATIONS</div>
+                            <ul class="indications-list">
+                                <li>GERD</li>
+                                <li>Acid Peptic Disorders</li>
+                                <li>Nausea & Vomiting</li>
+                                <li>Dyspepsia</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
 
-                <!-- Product 11 -->
-                <div class="product-card animate-on-scroll animate-fade-up">
-                    <div class="product-image-wrapper">
-                        <img src="images/Zyrelief-P Tab.png" alt="Zyrelief-P Tablet Box">
-                    </div>
-                    <div class="product-content">
-                        <div>
-                            <h3 class="product-title">Zyrelief-P Tab</h3>
-                            <p class="product-composition">Aceclofenac 100mg + Paracetamol 325mg</p>
+                <!-- Product 11: ZYLEVO-500 -->
+                <div class="product-card animate-on-scroll animate-fade-up" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="product-image-wrapper">
+                                <img src="images/Zylevo-500 Tab.png" alt="Zylevo-500 Tablet Box">
+                            </div>
+                            <div class="product-content">
+                                <div>
+                                    <h3 class="product-title">ZYLEVO-500 Tab</h3>
+                                    <p class="product-composition">Levofloxacin 500 mg Tablets IP</p>
+                                </div>
+                                <div>
+                                    <div class="product-meta">
+                                        <span class="meta-pack"><i class="fas fa-box"></i> 5x10</span>
+                                        <span class="meta-mrp">MRP: ₹99.00</span>
+                                    </div>
+                                    <p class="tap-hint"><i class="fas fa-hand-pointer"></i> Tap the card to see details</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="product-meta">
-                            <span class="meta-pack"><i class="fas fa-box"></i> 10x10</span>
-                            <span class="meta-mrp">MRP: ₹49.00</span>
+                        <div class="flip-card-back">
+                            <h4 class="back-subtitle">Powerful Action.</h4>
+                            <h3 class="back-title">Complete Protection.</h3>
+                            
+                            <div class="features-list">
+                                <div class="feature-item">
+                                    <div class="feature-icon"><i class="fas fa-star-of-life"></i></div>
+                                    <span class="feature-text">HIGH CLINICAL<br>EFFICACY</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon orange"><i class="fas fa-shield-virus"></i></div>
+                                    <span class="feature-text">BROAD SPECTRUM<br>ANTIBACTERIAL</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon green"><i class="fas fa-calendar-check"></i></div>
+                                    <span class="feature-text">CONVENIENT<br>ONCE DAILY DOSING</span>
+                                </div>
+                            </div>
+
+                            <div class="indications-badge">INDICATIONS</div>
+                            <ul class="indications-list">
+                                <li>Respiratory Tract Infections</li>
+                                <li>Urinary Tract Infections</li>
+                                <li>Skin & Soft Tissue Infections</li>
+                                <li>Gastrointestinal Infections</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
