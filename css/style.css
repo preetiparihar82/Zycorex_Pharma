@@ -266,7 +266,7 @@ img {
 }
 
 .section {
-    padding: 60px 0;
+    padding: 70px 0;
     position: relative;
 }
 
@@ -837,7 +837,7 @@ img {
 
 .intro-image-container img {
     width: 100%;
-    height: 480px;
+    height: 500px;
     object-fit: cover;
     transition: var(--transition-slow);
 }
@@ -848,8 +848,8 @@ img {
 
 .intro-badge {
     position: absolute;
-    bottom: 30px;
-    left: 30px;
+    bottom: 5px;
+    left: 10px;
     background: rgba(11, 19, 41, 0.85);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -1169,13 +1169,13 @@ img {
 
 .profile-image-wrapper img {
     width: 100%;
-    height: 500px;
+    height: 550px;
     object-fit: cover;
 }
 
 .profile-card-overlay {
     position: absolute;
-    bottom: -20px;
+    bottom: -70px;
     right: -20px;
     background: var(--gradient-primary);
     color: var(--txt-light);
@@ -4120,5 +4120,122 @@ textarea.form-control {
         margin-top: 50px !important;
        
         padding-top: 70px; 
+    }
+}
+
+/* --- NEW: Circular Animated Experience Badge --- */
+.profile-image-container {
+    position: relative; /* Ensures the badge stays locked to this container */
+}
+
+.circle-exp-badge {
+    position: absolute;
+    top: -40px;    /* Adjusted for better desktop balance */
+    left: -30px;   /* Adjusted for desktop */
+    width: 140px;
+    height: 140px;
+    background: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15), inset 0 0 15px rgba(14, 165, 233, 0.05);
+    border: 4px solid #ffffff;
+    z-index: 10;
+    animation: floatCircleBadge 4s ease-in-out infinite;
+}
+
+/* Decorative spinning ring for a premium, realistic look */
+.circle-exp-badge::before {
+    content: '';
+    position: absolute;
+    top: -8px; left: -8px; right: -8px; bottom: -8px;
+    border: 1px dashed var(--primary, #0ea5e9);
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: spinRing 20s linear infinite;
+}
+
+.circle-exp-badge .exp-num {
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--primary, #0ea5e9);
+    line-height: 1;
+}
+
+.circle-exp-badge .exp-txt {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: var(--dark, #1f2937);
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 4px;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+}
+
+/* Animations */
+@keyframes floatCircleBadge {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes spinRing {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* =========================================
+   RESPONSIVE DESIGN FOR TABLETS & MOBILE 
+========================================= */
+
+/* Tablets (Max Width: 991px) */
+@media (max-width: 991px) {
+    .circle-exp-badge {
+        width: 120px;
+        height: 120px;
+        top: -30px;
+        left: -15px;
+    }
+    .circle-exp-badge .exp-num {
+        font-size: 2.2rem;
+    }
+    .circle-exp-badge .exp-txt {
+        font-size: 0.65rem;
+    }
+}
+
+/* Mobile Devices (Max Width: 767px) */
+@media (max-width: 767px) {
+    .profile-image-container {
+        /* Adds space above the image so the badge doesn't cover your features list */
+        margin-top: 35px; 
+    }
+    .circle-exp-badge {
+        width: 95px;
+        height: 95px;
+        top: -50px;   /* Sits closer to the image */
+        left: -5px;   /* Pushed inward so it doesn't get cut off the screen edge */
+        border: 3px solid #ffffff; /* Slightly thinner border for mobile */
+    }
+    .circle-exp-badge::before {
+        /* Adjust the dashed ring spacing for the smaller badge */
+        top: -5px; left: -5px; right: -5px; bottom: -5px; 
+    }
+    .circle-exp-badge .exp-num {
+        font-size: 1.8rem; /* Smaller font for mobile */
+    }
+    .circle-exp-badge .exp-txt {
+        font-size: 0.55rem;
+        margin-top: 2px;
+    }
+    
+    /* Mute the float animation distance slightly for smaller screens */
+    @keyframes floatCircleBadge {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-8px); }
+        100% { transform: translateY(0); }
     }
 }
