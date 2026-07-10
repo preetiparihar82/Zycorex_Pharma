@@ -4130,7 +4130,7 @@ textarea.form-control {
 
 .circle-exp-badge {
     position: absolute;
-    top: -40px;    /* Adjusted for better desktop balance */
+    top: -70px;    /* Adjusted for better desktop balance */
     left: -30px;   /* Adjusted for desktop */
     width: 140px;
     height: 140px;
